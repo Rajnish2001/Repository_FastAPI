@@ -20,9 +20,9 @@ def retrive_blog(id,db:Session):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=f'Blog id {id} is Not Found!')
     return blog
 
-def delete_blog(id,db:Session):
-    blog = db.query(models.Blog).filter(models.Blog.id==id).first()
-    if blog is None:
+def blog_delete(id:int,db:Session):
+    blog = db.query(models.Blog).filter(models.Blog.id==id)
+    if blog.first() is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=f'Blog id {id} is Not Found!')
     # db.delete(blog)
     blog.delete(synchronize_session=False)

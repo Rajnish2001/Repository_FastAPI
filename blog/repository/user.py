@@ -23,11 +23,11 @@ def retrive_user(id,db:Session):
     return user
 
 
-def delete_user(id,db:Session):
-    user = db.query(models.User).filter(models.User.id==id).delete(synchronize_session=False)
-    if user is None:
+def user_delete(id:int,db:Session):
+    user = db.query(models.User).filter(models.User.id==id)
+    if user.first() is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=f'User id {id} is Not Found!')
     # db.delete(user)
-    # user.delete(synchronize_session=False)
+    user.delete(synchronize_session=False)
     db.commit()
     return 'User is deleted'

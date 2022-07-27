@@ -16,4 +16,5 @@ def get_db():
     try:
         yield db
     except:
-        db.close() 
+        db.close_all() 
+    

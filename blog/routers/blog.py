@@ -3,8 +3,7 @@ from typing import List
 from blog.schemas import Blog,ShowBlog
 from blog.database import SessionLocal,get_db
 from blog import models
-from blog.repository.blog import create_blog,get_all_blog,retrive_blog,delete_blog
-
+from blog.repository.blog import create_blog,get_all_blog,retrive_blog,blog_delete
 
 router = APIRouter(
     tags=['Blogs'],
@@ -26,4 +25,4 @@ def blog(id,db:SessionLocal=Depends(get_db)):
 
 @router.delete('/{id}',status_code=status.HTTP_204_NO_CONTENT)
 def delete_blog(id,db:SessionLocal=Depends(get_db)):
-    return delete_blog(id,db)
+    return blog_delete(id,db)

@@ -3,7 +3,7 @@ from typing import List
 from blog.schemas import User,ShowUser,UserView
 from blog.database import SessionLocal,get_db
 from blog import models
-from ..repository.user import Create_user,get_all_user,retrive_user,delete_user
+from ..repository.user import Create_user, user_delete,get_all_user,retrive_user
 
 router = APIRouter(
     tags=['Users'],
@@ -34,4 +34,4 @@ def delete_user(id,db:SessionLocal=Depends(get_db)):
     # db.delete(user)
     # db.commit()
     # return 'User is deleted'
-    return delete_user(id,db)
+    return user_delete(id,db)
